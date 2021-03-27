@@ -1,0 +1,33 @@
+.layout {
+    &_header {
+        margin-left: 16px;
+    }
+
+    &_footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        a {
+            border-top: 2px solid #000;
+            margin-top: 32px;
+            margin-left: 16px;
+        }
+    }
+
+    &_main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 16px;
+    }
+
+    h1 {
+        margin-left: 4px;
+    }
+
+    &_p {
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+    }
+}
