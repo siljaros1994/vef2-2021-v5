@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 import fetch from 'node-fetch';
 import { Link } from 'react-router-dom';
-import { NotFound } from '../../pages/NotFound';
 import s from './News.scss';
 
 News.propTypes = {
@@ -24,7 +23,7 @@ export function News({ category, quantity, expandable }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-  const [redirect, setRedirect] = useState(false);
+  const [ ,setRedirect] = useState(false);
   const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
@@ -52,13 +51,7 @@ export function News({ category, quantity, expandable }) {
       setData(json);
     }
     fetchData();
-    }, [category]);
-
-    if (status) {
-      return (
-        <Route component={NotFound} />
-      );
-    }
+    }, [apiUrl, category]);
     
     if (error) {
       return (<div>Villa kom upp!</div>);
@@ -68,13 +61,33 @@ export function News({ category, quantity, expandable }) {
       return (<div>Hleð inn gögn...</div>);
     }
 
-  const news = data || [];
-  let link;
-  if (allNews) {
-    link = <Link to='/' className={s.news_link}>Til baka</Link>;
-  } else {
-    link = <Link to={`/${title}`} className={s.news_link}>Allar fréttir</Link>;
-  }
+    if (data) {
+      const nextPath = expandable ? `/${routes[data.title]}` : "/";
+      let headline = data.items;
+      if (quantity) {
+        headline = headline.slice(0, quantity);
+      }
+  
+      return (
+        <div className={s.news}>
+          <h2>{data.title}</h2>
+          <ul className={s.news_list}>
+            {headline.map((item) => {
+              return (
+                <li className={s.news_item}><a className={s.news_link} href={item.link}>{item.title}</a></li>
+              );
+            })}
+          </ul>
+            <Link
+              className={s.news__routeref} to={{
+                pathname: nextPath,
+              }}
+            >
+              {expandable ? "Allar fréttir" : "Til baka"}
+            </Link>
+        </div>
+      );
+    }
 
   return (
     <div>
