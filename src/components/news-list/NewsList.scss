@@ -1,11 +1,12 @@
 .newslist {
-    &_row {
+    &_news1 {
+        width: 100%;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
     }
 
-    &_col {
+    &_news2 {
         width: 30%;
         margin-right: 16px;
         margin-bottom: 16px;
