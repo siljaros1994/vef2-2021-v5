@@ -42,5 +42,19 @@ export function NewsList() {
   if (loading) {
     return (<div>Hleð inn gögn...</div>);
   }
-  
+
+  const newslist = Array.from(data);
+  console.log(newslist);
+
+  return (
+    <div className={s.newslist_news1}>
+      {newsGroups.map((item) => {
+        return (
+          <div className={s.newslist_news2}>
+            <News category={item.id} quantity={5} expandable={true} />
+          </div>
+        )
+      })}
+    </div>
+  );
 }
