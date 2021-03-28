@@ -48,7 +48,7 @@ export function NewsList() {
 
   return (
     <div className={s.newslist_news1}>
-      {newsGroups.map((item) => {
+      {newslist.map((item) => {
         return (
           <div className={s.newslist_news2}>
             <News category={item.id} quantity={5} expandable={true} />
